@@ -74,6 +74,7 @@ CREATE TABLE DependentDisciplines (
     CONSTRAINT FK_DD_Discipline FOREIGN KEY (discipline) REFERENCES Disciplines (discipline_id),
     CONSTRAINT FK_DD_Depentent FOREIGN KEY (dependent_discipline) REFERENCES Disciplines (discipline_id),
 )
+
 -- Примерно тут начинается домашка
 
 CREATE TABLE Schedule (
@@ -112,7 +113,8 @@ CREATE TABLE HomeWorks (
     [group] INT NOT NULL,
     lesson BIGINT NOT NULL,
     task BINARY(1000) NOT NULL,
-    deadline DATE CONSTRAINT PK_HomeWorks PRIMARY KEY ([group], lesson),
+    deadline DATE,
+    CONSTRAINT PK_HomeWorks PRIMARY KEY ([group], lesson),
     CONSTRAINT FK_HW_Group FOREIGN KEY ([group]) REFERENCES Groups (group_id),
     CONSTRAINT FK_HW_Lesson FOREIGN KEY (lesson) REFERENCES Schedule (lesson_id)
 )
