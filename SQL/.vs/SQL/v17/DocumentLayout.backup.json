@@ -1,0 +1,65 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\PV_521\\SQL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{934EBEDF-F93F-0D42-36EB-DD028C4675FF}|DDL\\DDL.ssmssqlproj|E:\\PV_521\\SQL\\DDL\\SQLQuery2-Create Teachers \u0026 Disciplines.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{934EBEDF-F93F-0D42-36EB-DD028C4675FF}|DDL\\DDL.ssmssqlproj|solutionrelative:DDL\\SQLQuery2-Create Teachers \u0026 Disciplines.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{934EBEDF-F93F-0D42-36EB-DD028C4675FF}|DDL\\DDL.ssmssqlproj|E:\\PV_521\\SQL\\DDL\\SQLQuery0-Create Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{934EBEDF-F93F-0D42-36EB-DD028C4675FF}|DDL\\DDL.ssmssqlproj|solutionrelative:DDL\\SQLQuery0-Create Database.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{934EBEDF-F93F-0D42-36EB-DD028C4675FF}|DDL\\DDL.ssmssqlproj|E:\\PV_521\\SQL\\DDL\\SQLQuery1-Create Students branch.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}",
+      "RelativeMoniker": "D:0:0:{934EBEDF-F93F-0D42-36EB-DD028C4675FF}|DDL\\DDL.ssmssqlproj|solutionrelative:DDL\\SQLQuery1-Create Students branch.sql||{B5A506EB-11BE-4782-9A18-21265C2CA0B4}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SQLQuery2-Create Teachers \u0026 Disciplines.sql - MITRIY\\TEST.master (MITRIY\\mitri (59))",
+              "DocumentMoniker": "E:\\PV_521\\SQL\\DDL\\SQLQuery2-Create Teachers \u0026 Disciplines.sql",
+              "RelativeDocumentMoniker": "DDL\\SQLQuery2-Create Teachers \u0026 Disciplines.sql",
+              "ToolTip": "SQLQuery2-Create Teachers \u0026 Disciplines.sql - MITRIY\\TEST.master (MITRIY\\mitri (59))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-02-11T18:51:57.207Z",
+              "EditorCaption": " - MITRIY\\TEST.master (MITRIY\\mitri (59))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SQLQuery1-Create Students branch.sql - MITRIY\\TEST.master (MITRIY\\mitri (56))",
+              "DocumentMoniker": "E:\\PV_521\\SQL\\DDL\\SQLQuery1-Create Students branch.sql",
+              "RelativeDocumentMoniker": "DDL\\SQLQuery1-Create Students branch.sql",
+              "ToolTip": "SQLQuery1-Create Students branch.sql - MITRIY\\TEST.master (MITRIY\\mitri (56))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-02-11T18:51:55.056Z",
+              "EditorCaption": " - MITRIY\\TEST.master (MITRIY\\mitri (56))"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SQLQuery0-Create Database.sql - MITRIY\\TEST.master (MITRIY\\mitri (65))",
+              "DocumentMoniker": "E:\\PV_521\\SQL\\DDL\\SQLQuery0-Create Database.sql",
+              "RelativeDocumentMoniker": "DDL\\SQLQuery0-Create Database.sql",
+              "ToolTip": "SQLQuery0-Create Database.sql - MITRIY\\TEST.master (MITRIY\\mitri (65))",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-02-11T16:03:23.66Z",
+              "EditorCaption": " - MITRIY\\TEST.master (MITRIY\\mitri (65))"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
