@@ -92,7 +92,7 @@ CREATE TABLE Schedule
 (
     lesson_id BIGINT IDENTITY(1, 1),
     [date] DATE NOT NULL,
-    [time] TIME(7) NOT NULL,
+    [time] TIME(0) NOT NULL,
     [group] INT NOT NULL,
     discipline SMALLINT NOT NULL,
     teacher INT NOT NULL,
