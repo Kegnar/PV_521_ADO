@@ -112,7 +112,9 @@ CREATE TABLE Grades
     grade_2 TINYINT,
     CONSTRAINT PK_Grades PRIMARY KEY (student, lesson),
     CONSTRAINT FK_Grades_Lesson FOREIGN KEY (lesson) REFERENCES Schedule (lesson_id),
-    CONSTRAINT FK_Grades_Student FOREIGN KEY (student) REFERENCES Students (student_id)
+    CONSTRAINT FK_Grades_Student FOREIGN KEY (student) REFERENCES Students (student_id),
+    CONSTRAINT CK_Grade_1 CHECK(grade_1 >0 AND grade_1 <=12),
+    CONSTRAINT CK_Grade_2 CHECK(grade_2 >0 AND grade_2 <=12)
 )
 CREATE TABLE Exams
 (
