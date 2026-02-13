@@ -113,8 +113,14 @@ CREATE TABLE Grades
     CONSTRAINT PK_Grades PRIMARY KEY (student, lesson),
     CONSTRAINT FK_Grades_Lesson FOREIGN KEY (lesson) REFERENCES Schedule (lesson_id),
     CONSTRAINT FK_Grades_Student FOREIGN KEY (student) REFERENCES Students (student_id),
-    CONSTRAINT CK_Grade_1 CHECK(grade_1 >0 AND grade_1 <=12),
-    CONSTRAINT CK_Grade_2 CHECK(grade_2 >0 AND grade_2 <=12)
+    CONSTRAINT CK_Grade_1 CHECK (
+        grade_1>0
+        AND grade_1<=12
+    ),
+    CONSTRAINT CK_Grade_2 CHECK (
+        grade_2>0
+        AND grade_2<=12
+    )
 )
 CREATE TABLE Exams
 (
@@ -123,28 +129,46 @@ CREATE TABLE Exams
     grade TINYINT,
     CONSTRAINT PK_Exams PRIMARY KEY (student, discipline),
     CONSTRAINT FK_Exams_Discipline FOREIGN KEY (discipline) REFERENCES Disciplines (discipline_id),
-    CONSTRAINT FK_Exams_Student FOREIGN KEY (student) REFERENCES Students (student_id)
+    CONSTRAINT FK_Exams_Student FOREIGN KEY (student) REFERENCES Students (student_id),
+    CONSTRAINT CK_ExamGrade CHECK (
+        grade>0
+        AND grade<=12
+    )
 )
 CREATE TABLE HomeWorks
 (
     [group] INT NOT NULL,
     lesson BIGINT NOT NULL,
-    task BINARY(1000) NOT NULL,
+    [data] VARBINARY(MAX),
+    comment NVARCHAR(1024),
     deadline DATE,
     CONSTRAINT PK_HomeWorks PRIMARY KEY ([group], lesson),
     CONSTRAINT FK_HW_Group FOREIGN KEY ([group]) REFERENCES Groups (group_id),
-    CONSTRAINT FK_HW_Lesson FOREIGN KEY (lesson) REFERENCES Schedule (lesson_id)
+    CONSTRAINT FK_HW_Lesson FOREIGN KEY (lesson) REFERENCES Schedule (lesson_id),
+    CONSTRAINT CK_Null_HW CHECK (
+        [data] IS NOT NULL
+        OR comment IS NOT NULL
+    )
 )
 CREATE TABLE ResultsHW
 (
     student INT NOT NULL,
     [group] INT NOT NULL,
     lesson BIGINT NOT NULL,
-    result BINARY(1000),
-    report INT,
+    result VARBINARY(MAX),
+    comment NVARCHAR(1024),
     grade TINYINT,
+    CONSTRAINT PK_Results PRIMARY KEY (student, [group], lesson),
     CONSTRAINT FK_RHW_Groups FOREIGN KEY ([group], lesson) REFERENCES HomeWorks ([group], lesson),
-    CONSTRAINT FK_RHW_Students FOREIGN KEY (student) REFERENCES Students (student_id)
+    CONSTRAINT FK_RHW_Students FOREIGN KEY (student) REFERENCES Students (student_id),
+    CONSTRAINT CK_Result_Or_Comment CHECK (
+        result IS NOT NULL
+        OR comment IS NOT NULL
+    ),
+    CONSTRAINT CK_HWGrade CHECK (
+        grade>0
+        AND grade<=12
+    )
 );
 
 -- use master
