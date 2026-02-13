@@ -1,6 +1,7 @@
--- Генерация базы собрана в один DDL скрипт
--- Создаем базу
+--Генерация базы собрана в один DDL скрипт
+--Создаем базу
 USE master
+
 CREATE DATABASE PV_521_DDL_HW ON (
     NAME=PV_521_DDL_HW,
     FILENAME='E:\Microsoft SQL Server\MSSQL16.TEST\MSSQL\DATA\PV_521_DDL_HW.mdf',
@@ -14,6 +15,12 @@ CREATE DATABASE PV_521_DDL_HW ON (
     MAXSIZE=500 MB,
     FILEGROWTH=8 MB
 )
+GO
+
+--Иначе всю базу затолкаем не по адресу  :)
+USE PV_521_DDL_HW
+GO
+
 --Создаем таблицы сущностей
 CREATE TABLE Directions (
     direction_id tinyint PRIMARY KEY,
@@ -122,11 +129,12 @@ CREATE TABLE ResultsHW (
     student INT NOT NULL,
     [group] INT NOT NULL,
     lesson BIGINT NOT NULL,
-    result BINARY,
+    result BINARY(1000),
     report INT,
     grade TINYINT,
     CONSTRAINT FK_RHW_Groups FOREIGN KEY ([group], lesson) REFERENCES HomeWorks ([group], lesson),
     CONSTRAINT FK_RHW_Students FOREIGN KEY (student) REFERENCES Students (student_id)
-)
-GO;
+);
 
+-- use master
+-- drop database PV_521_DDL_HW
