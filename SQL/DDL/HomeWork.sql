@@ -27,11 +27,11 @@ CREATE TABLE Directions
     direction_name NVARCHAR(150) NOT NULL,
 )
 -- Форма обучения
-CREATE TABLE EducationForms
+CREATE TABLE EducationTypes
 (
-    form_id   TINYINT,
-    form_name NVARCHAR(50),
-    CONSTRAINT PK_Form PRIMARY KEY (form_id)
+    type_id   TINYINT,
+    type_name NVARCHAR(50),
+    CONSTRAINT PK_Form PRIMARY KEY (type_id)
 )
 -- Группы
 CREATE TABLE Groups
@@ -40,7 +40,7 @@ CREATE TABLE Groups
     group_name     NVARCHAR(24) NOT NULL,
     direction      TINYINT      NOT NULL,
     education_form TINYINT      NOT NULL,
-    CONSTRAINT FK_Groups_Form FOREIGN KEY (education_form) REFERENCES EducationForms (form_id),
+    CONSTRAINT FK_Groups_Form FOREIGN KEY (education_form) REFERENCES EducationTypes (type_id),
     CONSTRAINT FK_Groups_Direction FOREIGN KEY (direction) REFERENCES Directions (direction_id)
 )
 
@@ -118,16 +118,22 @@ CREATE TABLE DependentDisciplines
 
 -- Примерно тут начинается домашка
 
+--TODO: Добить создание Базы одним запросом. У кого готово, нужно добавить формы обучения
+-- (Стационар, полустационар, годичные) для группы нужны учебные дни, время и дата начала.
+
+
 -- Расписание учебных дней
 CREATE TABLE GroupsWeeklySchedule
 (
-    group_id    INT     NOT NULL,
-    day_of_week TINYINT NOT NULL CHECK (day_of_week > 0 AND day_of_week < 8),
-    lesson_number TINYINT NOT NULL CHECK (lesson_number >0 and lesson_number <6),
-    discipline_id SMALLINT ,
+    group_id      INT     NOT NULL,
+    day_of_week   TINYINT NOT NULL,
+    lesson_number TINYINT NOT NULL,
+    discipline_id SMALLINT,
     CONSTRAINT PK_GroupsWeeklySchedule PRIMARY KEY (group_id, day_of_week, lesson_number),
-    CONSTRAINT FK_GWS_Discipline FOREIGN KEY (discipline_id) REFERENCES Disciplines(discipline_id),
-    CONSTRAINT FK_GWS_Group FOREIGN KEY (group_id) REFERENCES Groups(group_id)
+    CONSTRAINT FK_GWS_Discipline FOREIGN KEY (discipline_id) REFERENCES Disciplines (discipline_id),
+    CONSTRAINT FK_GWS_Group FOREIGN KEY (group_id) REFERENCES Groups (group_id),
+    CONSTRAINT CK_DayOfWeek CHECK (day_of_week > 0 AND day_of_week < 8),
+    CONSTRAINT CK_LessonNumber CHECK (lesson_number > 0 AND lesson_number < 6)
 
 )
 -- Расписание занятий
@@ -222,5 +228,3 @@ CREATE TABLE ResultsHW
         )
 );
 
---TODO: Добить создание Базы одним запросом. У кого готово, нужно добавить формы обучения
--- (Стационар, полустационар, годичные) для группы нужны учебные дни, время и дата начала.
