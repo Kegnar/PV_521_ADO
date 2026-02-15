@@ -21,6 +21,8 @@ USE PV_521_DDL_HW
 GO
 
 --Создаем таблицы сущностей
+
+-- Направления обучения
 CREATE TABLE Directions
 (
     direction_id   TINYINT PRIMARY KEY,
@@ -31,7 +33,7 @@ CREATE TABLE EducationTypes
 (
     type_id   TINYINT,
     type_name NVARCHAR(50),
-    CONSTRAINT PK_Form PRIMARY KEY (type_id)
+    CONSTRAINT PK_EducationType PRIMARY KEY (type_id)
 )
 -- Группы
 CREATE TABLE Groups
@@ -39,11 +41,11 @@ CREATE TABLE Groups
     group_id       INT PRIMARY KEY,
     group_name     NVARCHAR(24) NOT NULL,
     direction      TINYINT      NOT NULL,
-    education_form TINYINT      NOT NULL,
-    CONSTRAINT FK_Groups_Form FOREIGN KEY (education_form) REFERENCES EducationTypes (type_id),
-    CONSTRAINT FK_Groups_Direction FOREIGN KEY (direction) REFERENCES Directions (direction_id)
-)
+    education_type TINYINT      NOT NULL,
+    CONSTRAINT FK_Groups_Type FOREIGN KEY (education_type) REFERENCES EducationTypes (type_id),
+    CONSTRAINT FK_Groups_Direction FOREIGN KEY (direction) REFERENCES Directions (direction_id),
 
+)
 -- Студенты
 CREATE TABLE Students
 (
@@ -56,7 +58,6 @@ CREATE TABLE Students
     -- названия полей, совпадающих с зарезервированными, нужно заключать в []
     CONSTRAINT FK_Students_Group FOREIGN KEY ([group]) REFERENCES Groups (group_id)
 )
-
 --Преподаватели
 CREATE TABLE Teachers
 (
@@ -66,15 +67,13 @@ CREATE TABLE Teachers
     middle_name NVARCHAR(50),
     birth_date  DATE         NOT NULL,
 )
-
---Направления обучения
+--Дисциплины
 CREATE TABLE Disciplines
 (
     discipline_id     SMALLINT PRIMARY KEY,
     discipline_name   NVARCHAR(250) NOT NULL,
     number_of_lessons TINYINT       NOT NULL,
 )
-
 
 CREATE TABLE DisciplinesDirectionsRelation
 (
@@ -85,7 +84,6 @@ CREATE TABLE DisciplinesDirectionsRelation
     CONSTRAINT FK_DDR_Direction FOREIGN KEY (direction) REFERENCES Directions (direction_id)
 )
 
-
 CREATE TABLE TeachersDisciplinesRelation
 (
     teacher    INT,
@@ -94,7 +92,6 @@ CREATE TABLE TeachersDisciplinesRelation
     CONSTRAINT FK_TDR_Teacher FOREIGN KEY (teacher) REFERENCES Teachers (teacher_id),
     CONSTRAINT FK_TDR_Discipline FOREIGN KEY (discipline) REFERENCES Disciplines (discipline_id)
 )
-
 
 CREATE TABLE RequiredDisciplines
 (
@@ -105,7 +102,6 @@ CREATE TABLE RequiredDisciplines
     CONSTRAINT FK_RD_Required FOREIGN KEY (required_discipline) REFERENCES Disciplines (discipline_id),
 )
 
-
 CREATE TABLE DependentDisciplines
 (
     discipline           SMALLINT,
@@ -115,12 +111,19 @@ CREATE TABLE DependentDisciplines
     CONSTRAINT FK_DD_Dependent FOREIGN KEY (dependent_discipline) REFERENCES Disciplines (discipline_id),
 )
 
-
 -- Примерно тут начинается домашка
 
 --TODO: Добить создание Базы одним запросом. У кого готово, нужно добавить формы обучения
 -- (Стационар, полустационар, годичные) для группы нужны учебные дни, время и дата начала.
 
+-- Расписание звонков
+CREATE TABLE Lessons
+(
+    lesson_id  TINYINT NOT NULL,
+    start_time TIME    NOT NULL,
+    end_time   TIME    NOT NULL,
+    CONSTRAINT PK_Lessons PRIMARY KEY (lesson_id)
+)
 
 -- Расписание учебных дней
 CREATE TABLE GroupsWeeklySchedule
@@ -133,22 +136,25 @@ CREATE TABLE GroupsWeeklySchedule
     CONSTRAINT FK_GWS_Discipline FOREIGN KEY (discipline_id) REFERENCES Disciplines (discipline_id),
     CONSTRAINT FK_GWS_Group FOREIGN KEY (group_id) REFERENCES Groups (group_id),
     CONSTRAINT CK_DayOfWeek CHECK (day_of_week > 0 AND day_of_week < 8),
-    CONSTRAINT CK_LessonNumber CHECK (lesson_number > 0 AND lesson_number < 6)
-
+    CONSTRAINT CK_LessonNumber CHECK (lesson_number > 0 AND lesson_number < 6),
+    CONSTRAINT FK_GWS_LessonNumber FOREIGN KEY (lesson_number) REFERENCES Lessons (lesson_id)
 )
+
+
 -- Расписание занятий
 CREATE TABLE Schedule
 (
-    lesson_id  BIGINT IDENTITY (1, 1),
-    [date]     DATE          NOT NULL,
-    [time]     TIME(0)       NOT NULL,
-    [group]    INT           NOT NULL,
-    discipline SMALLINT      NOT NULL,
-    teacher    INT           NOT NULL,
-    subject    NVARCHAR(256) NOT NULL,
-    [status]   BIT           NOT NULL,
+    lesson_id     BIGINT IDENTITY (1, 1),
+    [date]        DATE          NOT NULL,
+    lesson_number TINYINT       NOT NULL,
+    [group]       INT           NOT NULL,
+    discipline    SMALLINT      NOT NULL,
+    teacher       INT           NOT NULL,
+    subject       NVARCHAR(256) NOT NULL,
+    [status]      BIT           NOT NULL,
     -- да, так тоже можно, имена для первичных ключей лишними не бывают
     CONSTRAINT PK_Lesson PRIMARY KEY (lesson_id),
+    CONSTRAINT FK_Lessons_LessonNumber FOREIGN KEY (lesson_number) REFERENCES Lessons (lesson_id),
     CONSTRAINT FK_Schedule_Groups FOREIGN KEY ([group]) REFERENCES Groups (group_id),
     CONSTRAINT FK_Schedule_Discipline FOREIGN KEY (discipline) REFERENCES Disciplines (discipline_id),
     CONSTRAINT FK_Schedule_Teachers FOREIGN KEY (teacher) REFERENCES Teachers (teacher_id)
