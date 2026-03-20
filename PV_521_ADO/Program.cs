@@ -21,10 +21,10 @@ namespace PV_521_ADO
             
             string cmd =
                 "SELECT movie_id,title,release_date,first_name,last_name FROM Movies,Directors WHERE director=director_id";
-            HomeWork1.PrintTable(connectionString, cmd);
+            HomeWork1.PrintAdvTable(connectionString, cmd);
 
             string commandScalar = "SELECT COUNT(*) FROM Movies";
-            Console.WriteLine($"Количество записей:\t{HomeWork1.PrintScalar(connectionString, commandScalar)}");
+            //Console.WriteLine($"Количество записей:\t{HomeWork1.PrintScalar(connectionString, commandScalar)}");
 
             Console.WriteLine();
         }
