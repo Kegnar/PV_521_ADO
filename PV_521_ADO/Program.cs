@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.SqlClient;
 using PV_521_ADO.HomeWork;
+
 
 namespace PV_521_ADO
 {
@@ -7,7 +9,7 @@ namespace PV_521_ADO
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine(connection_string);
+            //
             string connectionString =
                 @"Data Source=MITRIY\TEST;
                 Initial Catalog=Movies_PV_521;
@@ -17,14 +19,19 @@ namespace PV_521_ADO
                 TrustServerCertificate=False;
                 ApplicationIntent=ReadWrite;
                 MultiSubnetFailover=False";
-            
-            string cmd = "SELECT movie_id,title,release_date,first_name,last_name FROM Movies,Directors WHERE director=director_id";
+
+            Connector connector = new Connector(connectionString);
+
+            string cmd =
+                "SELECT movie_id,title,release_date,first_name,last_name FROM Movies,Directors WHERE director=director_id";
             HomeWork1.PrintAdvTable(connectionString, cmd);
 
             string commandScalar = "SELECT COUNT(*) FROM Movies";
             Console.WriteLine($"Количество записей:\t{HomeWork1.PrintScalar(connectionString, commandScalar)}");
 
             Console.WriteLine();
+            connector.Select("SELECT COUNT(*) FROM Movies");
+            Console.WriteLine($"Количество записей: {connector.Scalar("SELECT COUNT(*) FROM Directors")}");
         }
     }
 }
