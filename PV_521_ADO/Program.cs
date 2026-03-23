@@ -12,7 +12,14 @@ namespace PV_521_ADO
 	{
 		static void Main(string[] args)
 		{
-			string connection_string = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Movies_PV_521;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+			string connection_string = @"Data Source=MITRIY\TEST;
+			Initial Catalog=Movies_PV_521;
+			Integrated Security=True;
+			Connect Timeout=30;
+			Encrypt=False;
+			TrustServerCertificate=False;
+			ApplicationIntent=ReadWrite;
+			MultiSubnetFailover=False";
 
 			Connector connector = new Connector(connection_string);
 
