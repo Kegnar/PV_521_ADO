@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Data.SqlClient;
+using Connection;
 
 namespace PV_521_ADO
 {
