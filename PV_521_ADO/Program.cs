@@ -42,8 +42,8 @@ namespace PV_521_ADO
 
 			//connection.Close();
 			
-			Console.WriteLine($"PK_Name: {connector.GetPrimaryKeyName("MoviesDirectors")}");
-			Console.WriteLine($"PK_Name: {connector.GetPrimaryKeyPosition("MoviesDirectors")}");
+			Console.WriteLine($"PK_Name: {connector.GetPrimaryKeyName("Movies")}");
+			Console.WriteLine($"PK_Pos: {connector.GetPrimaryKeyPosition("Movies")}");
 			
 			
 			//connector.Insert("first_name, last_name","N'Stephen',N'Spielberg'","Directors");

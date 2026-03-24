@@ -17,10 +17,10 @@ namespace PV_521_ADO
 
         public void Select(string cmd)
         {
-            SqlCommand command = new SqlCommand(cmd, _connection);
+            using SqlCommand command = new SqlCommand(cmd, _connection);
             _connection.Open();
 
-            SqlDataReader reader = command.ExecuteReader();
+            using SqlDataReader reader = command.ExecuteReader();
             for (int i = 0; i < reader.FieldCount; i++)
                 Console.Write(reader.GetName(i) + "\t");
             Console.WriteLine();
@@ -32,8 +32,8 @@ namespace PV_521_ADO
                 Console.WriteLine();
             }
 
-            reader.Close();
-            _connection.Close();
+            // reader.Close();
+            // _connection.Close();
         }
 
         public void Select(string fields, string tables, string condition = "")
@@ -49,10 +49,10 @@ namespace PV_521_ADO
             object result = null;
             _connection.Open();
 
-            SqlCommand command = new SqlCommand(cmd, _connection);
+            using SqlCommand command = new SqlCommand(cmd, _connection);
             result = command.ExecuteScalar(); //Выполнение скалярного запроса.
 
-            _connection.Close();
+            //_connection.Close();
             return result;
         }
 
@@ -60,7 +60,7 @@ namespace PV_521_ADO
 
         public void Insert(string cmd)
         {
-            SqlCommand command = new SqlCommand(cmd, _connection);
+            using SqlCommand command = new SqlCommand(cmd, _connection);
             Console.WriteLine(_connection.State);
          
             _connection.Open();
@@ -77,7 +77,7 @@ namespace PV_521_ADO
                     Console.WriteLine("Good");
                 }
             }
-            _connection.Close();
+            //_connection.Close();
         }
 
         public void Insert(string fields, string values, string table)
@@ -130,12 +130,12 @@ namespace PV_521_ADO
         public int GetMaxPrimaryKey(string table)
         {
             string cmd = $"SELECT * FROM {table}";
-            SqlCommand command = new SqlCommand(cmd, _connection);
+            using SqlCommand command = new SqlCommand(cmd, _connection);
             _connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
+            using SqlDataReader reader = command.ExecuteReader();
             string pkName = GetPrimaryKeyName(table);       //вместо string pk_name = reader.GetName(0);
-            reader.Close();
-            _connection.Close();
+            //reader.Close();
+            //_connection.Close();
             return (int)Scalar($"SELECT MAX({pkName}) FROM {table}");
         }
         /// <summary>
