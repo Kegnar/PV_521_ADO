@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,24 @@ namespace PV_521_ADO
 			cmd += ";";
 			Select(cmd);
 		}
+
+		public Dictionary<string, int> GetDictionary(string table)
+		{
+			Dictionary<string, int> dictionary = new Dictionary<string, int>();
+			string cmd = $"SELECT {table.Substring(0, table.Length-1)}_name,{table.Substring(0, table.Length-1)}_id FROM {table}";
+			SqlCommand command = new SqlCommand(cmd, connection);
+			SqlDataReader reader = command.ExecuteReader();
+			connection.Open();
+			while (reader.Read())
+			{
+				dictionary.Add(reader[0].ToString(), Convert.ToInt32(reader[1]));
+			}
+			connection.Close();
+			reader.Close();
+			return dictionary;
+		}
+		
+		
 		public object Scalar(string cmd)
 		{
 			object result = null;
@@ -73,7 +92,6 @@ namespace PV_521_ADO
 		}
 		public string GetPrimaryKeyColumnName(string table)
 		{
-			string raw =  @"RAW string";	//RAW-строка игнорирует переносы
 			string cmd = $@"SELECT	INFORMATION_SCHEMA.KEY_COLUMN_USAGE.COLUMN_NAME
 FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
 WHERE   TABLE_NAME = N'{table}'

@@ -11,20 +11,20 @@ namespace DBtools
 {
 	public class Connector
 	{
-		string connection_string;
-		SqlConnection connection;
+		string _connectionString;
+		SqlConnection _connection;
 
-		public Connector(string connection_string)
+		public Connector(string connectionString)
 		{
-			Console.WriteLine(connection_string);
-			this.connection_string = connection_string;
-			connection = new SqlConnection(connection_string);
+			Console.WriteLine(connectionString);
+			this._connectionString = connectionString;
+			_connection = new SqlConnection(connectionString);
 		}
 		public DataTable Select(string cmd)
 		{
 			DataTable table = new DataTable();
-			connection.Open();
-			SqlCommand command = new SqlCommand(cmd, connection);
+			_connection.Open();
+			SqlCommand command = new SqlCommand(cmd, _connection);
 
 			SqlDataReader reader = command.ExecuteReader();
 			for (int i = 0; i < reader.FieldCount; i++)
@@ -46,7 +46,7 @@ namespace DBtools
 				table.Rows.Add(row);
 			}
 			reader.Close();
-			connection.Close();
+			_connection.Close();
 			return table;
 		}
 		public DataTable Select(string fields, string tables, string condition = "")
@@ -76,23 +76,23 @@ $"SELECT {table.Substring(0, table.Length-1)}_name,{table.Substring(0,table.Leng
 		public object Scalar(string cmd)
 		{
 			object result = null;
-			connection.Open();
+			_connection.Open();
 
-			SqlCommand command = new SqlCommand(cmd, connection);
+			SqlCommand command = new SqlCommand(cmd, _connection);
 			result = command.ExecuteScalar();   //Выполнение скалярного запроса.
 
-			connection.Close();
+			_connection.Close();
 			return result;
 		}
 		public int GetMaxPrimaryKey(string table)
 		{
 			string cmd = $"SELECT * FROM {table}";
-			SqlCommand command = new SqlCommand(cmd, connection);
-			connection.Open();
+			SqlCommand command = new SqlCommand(cmd, _connection);
+			_connection.Open();
 			SqlDataReader reader = command.ExecuteReader();
 			string pk_name = reader.GetName(0);
 			reader.Close();
-			connection.Close();
+			_connection.Close();
 			return (int)Scalar($"SELECT MAX({pk_name}) FROM {table}");
 		}
 		public int GetNextPrimaryKey(string table)
@@ -101,7 +101,7 @@ $"SELECT {table.Substring(0, table.Length-1)}_name,{table.Substring(0,table.Leng
 		}
 		public string GetPrimaryKeyColumnName(string table)
 		{
-			string raw = @"RAW string"; //RAW-строка игнорирует переносы
+			//string raw = @"RAW string"; //RAW-строка игнорирует переносы
 			string cmd = $@"SELECT	INFORMATION_SCHEMA.KEY_COLUMN_USAGE.COLUMN_NAME
 FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
 WHERE   TABLE_NAME = N'{table}'
@@ -111,8 +111,8 @@ AND CONSTRAINT_NAME LIKE N'PK_%'";
 
 		public void Insert(string cmd)
 		{
-			SqlCommand command = new SqlCommand(cmd, connection);
-			connection.Open();
+			SqlCommand command = new SqlCommand(cmd, _connection);
+			_connection.Open();
 			try
 			{
 				command.ExecuteNonQuery();
@@ -126,7 +126,7 @@ AND CONSTRAINT_NAME LIKE N'PK_%'";
 					Console.WriteLine("Good");
 				}
 			}
-			connection.Close();
+			_connection.Close();
 		}
 		public void Insert(string table, string fields, string values)
 		{
