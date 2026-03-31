@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Data;
 using System.Data.SqlClient;
 
@@ -62,15 +58,15 @@ namespace DBtools
 			string cmd = 
 $"SELECT {table.Substring(0, table.Length-1)}_name,{table.Substring(0,table.Length-1)}_id FROM {table}";
 			if (condition != "") cmd += $" WHERE {condition}";
-			SqlCommand command = new SqlCommand(cmd, connection);
-			connection.Open();
+			SqlCommand command = new SqlCommand(cmd, _connection);
+			_connection.Open();
 			SqlDataReader reader = command.ExecuteReader();
 			while (reader.Read())
 			{
 				dictionary.Add(reader[0].ToString(), Convert.ToInt32(reader[1]));
 			}
 			reader.Close();
-			connection.Close();
+			_connection.Close();
 			return dictionary;
 		}
 		public object Scalar(string cmd)
