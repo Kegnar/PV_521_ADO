@@ -45,7 +45,7 @@
             this.dtpBirthDate = new System.Windows.Forms.DateTimePicker();
             this.btnPhotoSelect = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbAddStudentGroup = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tbFirstName
@@ -193,13 +193,14 @@
             this.label1.TabIndex = 21;
             this.label1.Text = "Group";
             // 
-            // comboBox1
+            // cbAddStudentGroup
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(134, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 22;
+            this.cbAddStudentGroup.FormattingEnabled = true;
+            this.cbAddStudentGroup.Location = new System.Drawing.Point(134, 10);
+            this.cbAddStudentGroup.Name = "cbAddStudentGroup";
+            this.cbAddStudentGroup.Size = new System.Drawing.Size(121, 21);
+            this.cbAddStudentGroup.TabIndex = 22;
+            this.cbAddStudentGroup.SelectedIndexChanged += new System.EventHandler(this.cbAddStudentGroup_SelectedIndexChanged);
             // 
             // AddStudent
             // 
@@ -208,7 +209,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(364, 305);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbAddStudentGroup);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPhotoSelect);
             this.Controls.Add(this.dtpBirthDate);
@@ -256,6 +257,6 @@
         private System.Windows.Forms.DateTimePicker dtpBirthDate;
         private System.Windows.Forms.Button btnPhotoSelect;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbAddStudentGroup;
     }
 }
