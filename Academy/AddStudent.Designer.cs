@@ -44,11 +44,13 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.dtpBirthDate = new System.Windows.Forms.DateTimePicker();
             this.btnPhotoSelect = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tbFirstName
             // 
-            this.tbFirstName.Location = new System.Drawing.Point(135, 12);
+            this.tbFirstName.Location = new System.Drawing.Point(134, 37);
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(217, 20);
             this.tbFirstName.TabIndex = 0;
@@ -56,28 +58,28 @@
             // 
             // tbPhoneNumber
             // 
-            this.tbPhoneNumber.Location = new System.Drawing.Point(135, 116);
+            this.tbPhoneNumber.Location = new System.Drawing.Point(134, 141);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.Size = new System.Drawing.Size(217, 20);
             this.tbPhoneNumber.TabIndex = 1;
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(135, 90);
+            this.tbEmail.Location = new System.Drawing.Point(134, 115);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(217, 20);
             this.tbEmail.TabIndex = 2;
             // 
             // tbMiddleName
             // 
-            this.tbMiddleName.Location = new System.Drawing.Point(135, 64);
+            this.tbMiddleName.Location = new System.Drawing.Point(134, 89);
             this.tbMiddleName.Name = "tbMiddleName";
             this.tbMiddleName.Size = new System.Drawing.Size(217, 20);
             this.tbMiddleName.TabIndex = 4;
             // 
             // tbLastName
             // 
-            this.tbLastName.Location = new System.Drawing.Point(135, 38);
+            this.tbLastName.Location = new System.Drawing.Point(134, 63);
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(217, 20);
             this.tbLastName.TabIndex = 5;
@@ -85,7 +87,7 @@
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(12, 19);
+            this.lblFirstName.Location = new System.Drawing.Point(11, 44);
             this.lblFirstName.Name = "lblFirstName";
             this.lblFirstName.Size = new System.Drawing.Size(55, 13);
             this.lblFirstName.TabIndex = 6;
@@ -94,7 +96,7 @@
             // lblLastName
             // 
             this.lblLastName.AutoSize = true;
-            this.lblLastName.Location = new System.Drawing.Point(12, 45);
+            this.lblLastName.Location = new System.Drawing.Point(11, 70);
             this.lblLastName.Name = "lblLastName";
             this.lblLastName.Size = new System.Drawing.Size(56, 13);
             this.lblLastName.TabIndex = 7;
@@ -103,7 +105,7 @@
             // lblMiddleName
             // 
             this.lblMiddleName.AutoSize = true;
-            this.lblMiddleName.Location = new System.Drawing.Point(12, 71);
+            this.lblMiddleName.Location = new System.Drawing.Point(11, 96);
             this.lblMiddleName.Name = "lblMiddleName";
             this.lblMiddleName.Size = new System.Drawing.Size(67, 13);
             this.lblMiddleName.TabIndex = 8;
@@ -112,7 +114,7 @@
             // lblBirthDate
             // 
             this.lblBirthDate.AutoSize = true;
-            this.lblBirthDate.Location = new System.Drawing.Point(12, 147);
+            this.lblBirthDate.Location = new System.Drawing.Point(11, 172);
             this.lblBirthDate.Name = "lblBirthDate";
             this.lblBirthDate.Size = new System.Drawing.Size(52, 13);
             this.lblBirthDate.TabIndex = 9;
@@ -121,7 +123,7 @@
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(12, 94);
+            this.lblEmail.Location = new System.Drawing.Point(11, 119);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(32, 13);
             this.lblEmail.TabIndex = 10;
@@ -130,7 +132,7 @@
             // lblPhoneNumber
             // 
             this.lblPhoneNumber.AutoSize = true;
-            this.lblPhoneNumber.Location = new System.Drawing.Point(12, 120);
+            this.lblPhoneNumber.Location = new System.Drawing.Point(11, 145);
             this.lblPhoneNumber.Name = "lblPhoneNumber";
             this.lblPhoneNumber.Size = new System.Drawing.Size(76, 13);
             this.lblPhoneNumber.TabIndex = 11;
@@ -139,7 +141,7 @@
             // lblPhoto
             // 
             this.lblPhoto.AutoSize = true;
-            this.lblPhoto.Location = new System.Drawing.Point(12, 177);
+            this.lblPhoto.Location = new System.Drawing.Point(11, 202);
             this.lblPhoto.Name = "lblPhoto";
             this.lblPhoto.Size = new System.Drawing.Size(35, 13);
             this.lblPhoto.TabIndex = 14;
@@ -168,19 +170,36 @@
             // 
             // dtpBirthDate
             // 
-            this.dtpBirthDate.Location = new System.Drawing.Point(135, 143);
+            this.dtpBirthDate.Location = new System.Drawing.Point(134, 168);
             this.dtpBirthDate.Name = "dtpBirthDate";
             this.dtpBirthDate.Size = new System.Drawing.Size(112, 20);
             this.dtpBirthDate.TabIndex = 18;
             // 
             // btnPhotoSelect
             // 
-            this.btnPhotoSelect.Location = new System.Drawing.Point(135, 172);
+            this.btnPhotoSelect.Location = new System.Drawing.Point(134, 197);
             this.btnPhotoSelect.Name = "btnPhotoSelect";
             this.btnPhotoSelect.Size = new System.Drawing.Size(74, 23);
             this.btnPhotoSelect.TabIndex = 19;
             this.btnPhotoSelect.Text = "Select";
             this.btnPhotoSelect.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(36, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Group";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(134, 10);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 22;
             // 
             // AddStudent
             // 
@@ -189,6 +208,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(364, 305);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnPhotoSelect);
             this.Controls.Add(this.dtpBirthDate);
             this.Controls.Add(this.btnCancel);
@@ -234,5 +255,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.DateTimePicker dtpBirthDate;
         private System.Windows.Forms.Button btnPhotoSelect;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
