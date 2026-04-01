@@ -96,5 +96,11 @@ namespace Academy
 				);
 			toolStripStatusLabel.Text = $"{status_messages[0]}: {dgvStudents.RowCount - 1}";
 		}
-	}
+
+        private void btnAddStudents_Click(object sender, EventArgs e)
+        {
+			AddStudent newStudent = new AddStudent();
+            newStudent.Show();
+        }
+    }
 }
