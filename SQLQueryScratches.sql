@@ -1,0 +1,1 @@
+﻿insert into Students (first_name, last_name, middle_name, birth_date, email, phone, photo) values (  );
