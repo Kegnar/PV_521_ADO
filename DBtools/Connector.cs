@@ -101,20 +101,20 @@ $"SELECT {table.Substring(0, table.Length-1)}_name,{table.Substring(0,table.Leng
 		}
 		public string GetPrimaryKeyColumnName(string table)
 		{
-			string raw = @"RAW string"; //RAW-строка игнорирует переносы
-			string cmd = $@"SELECT	INFORMATION_SCHEMA.KEY_COLUMN_USAGE.COLUMN_NAME
-FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-WHERE   TABLE_NAME = N'{table}'
-AND CONSTRAINT_NAME LIKE N'PK_%'";
+			//string raw = @"RAW string"; //RAW-строка игнорирует переносы
+			string cmd = $@"SELECT INFORMATION_SCHEMA.KEY_COLUMN_USAGE.COLUMN_NAME
+							FROM   INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+							WHERE  TABLE_NAME = N'{table}'
+							AND CONSTRAINT_NAME LIKE N'PK_%';";
 			return (string)Scalar(cmd);
-		}
+        }
 
-		public void Insert(string cmd)
+        public void Insert(string cmd)
 		{
 			SqlCommand command = new SqlCommand(cmd, connection);
 			connection.Open();
-			try
-			{
+            try
+            {
 				command.ExecuteNonQuery();
 			}
 			catch (Exception ex)
