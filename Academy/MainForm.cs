@@ -101,8 +101,17 @@ namespace Academy
 
 		private void buttonAddStudent_Click(object sender, EventArgs e)
 		{
-			studentForm = new StudentForm();
-			studentForm.ShowDialog();
+			if (dgvStudents.SelectedRows.Count == 0)
+			{
+                studentForm = new StudentForm();
+                studentForm.ShowDialog();
+            }
+			else
+			{
+				var studentId = 
+                studentForm = new StudentForm(Convert.ToInt32(dgvStudents.SelectedRows[0]));
+                studentForm.ShowDialog();
+            }
 		}
 	}
 }

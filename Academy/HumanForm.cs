@@ -12,15 +12,26 @@ using System.Configuration;
 
 namespace Academy
 {
-	public abstract partial class HumanForm : Form
+	public partial class HumanForm : Form
 	{
 		//static protected DBtools.Connector connector;
-		public HumanForm()
+		protected HumanForm()
 		{
 			InitializeComponent();
 			//connector = new DBtools.Connector(ConfigurationManager.ConnectionStrings["PV_521_Import"].ConnectionString);
 		}
 
-		protected abstract void buttonOK_Click(object sender, EventArgs e);
-	}
+		protected virtual void buttonOK_Click(object sender, EventArgs e) { }
+
+        protected virtual void buttonCancel_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Закрыть форму?\nИзменения будут отменены.", "Внимание!", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
+
+        }
+
+    }
 }

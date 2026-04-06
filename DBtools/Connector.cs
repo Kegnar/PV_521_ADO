@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace DBtools
 {
@@ -75,11 +76,11 @@ $"SELECT {table.Substring(0, table.Length-1)}_name,{table.Substring(0,table.Leng
 		}
 		public object Scalar(string cmd)
 		{
-			object result = null;
+			 
 			connection.Open();
 
 			SqlCommand command = new SqlCommand(cmd, connection);
-			result = command.ExecuteScalar();   //Выполнение скалярного запроса.
+            object result = command.ExecuteScalar();   //Выполнение скалярного запроса.
 
 			connection.Close();
 			return result;
@@ -149,5 +150,56 @@ $"SELECT {table.Substring(0, table.Length-1)}_name,{table.Substring(0,table.Leng
 			cmd += $"INSERT {table}({fields}) VALUES ({parsed_values})";
 			Insert(cmd);
 		}
-	}
+
+		// insert с проверками
+
+        public bool Insert(string table, Dictionary<string, object> data)
+        {
+            var fields = string.Join(", ", data.Keys.Select(k => $"[{k}]"));
+            var whereClauses = new List<string>();
+            var valuesList = new List<string>();
+
+            foreach (var kvp in data)
+            {
+                string fieldName = $"[{kvp.Key}]";
+                string safeValue;
+
+                if (kvp.Value == null || kvp.Value == DBNull.Value)
+                {
+                    safeValue = "NULL";
+                }
+                else if (kvp.Value is DateTime dt)
+                {
+                    safeValue = $"'{dt:yyyy-MM-dd HH:mm:ss}'";
+                }
+                else if (kvp.Value is int || kvp.Value is long || kvp.Value is decimal || kvp.Value is double || kvp.Value is float)
+                {
+                    safeValue = kvp.Value.ToString();
+                }
+                else
+                {
+                    safeValue = $"'{kvp.Value.ToString().Replace("'", "''")}'";
+                }
+
+                whereClauses.Add($"{fieldName} = {safeValue}");
+                valuesList.Add(safeValue);
+            }
+
+            var whereClause = string.Join(" AND ", whereClauses);
+            var valuesClause = string.Join(", ", valuesList);
+
+            string cmdText = $@"
+        IF NOT EXISTS (SELECT 1 FROM [{table}] WHERE {whereClause})
+        BEGIN
+            INSERT INTO [{table}] ({fields}) VALUES ({valuesClause})
+            SELECT 1 -- Успешно вставлено
+        END
+        ELSE
+        BEGIN
+            SELECT 0 -- Уже существует
+        END";
+
+            return Convert.ToInt32(Scalar(cmdText)) == 1;
+        }
+    }
 }
